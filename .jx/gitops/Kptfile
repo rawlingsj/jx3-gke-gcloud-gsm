@@ -1,0 +1,11 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+    name: gitops
+upstream:
+    type: git
+    git:
+        commit: 947f97faec89ec8e822f7159c677e816908ecdd1
+        repo: https://github.com/jenkins-x/jx3-gitops-template
+        directory: /.jx/gitops/gsm
+        ref: master

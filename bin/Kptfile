@@ -1,0 +1,11 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+    name: bin
+upstream:
+    type: git
+    git:
+        commit: 5301c8f6f46722db938b71fcefaf625173a5292f
+        repo: https://github.com/jenkins-x/jx3-gitops-template
+        directory: /infra/gcloud/bin
+        ref: master

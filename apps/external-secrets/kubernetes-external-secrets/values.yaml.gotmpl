@@ -1,0 +1,12 @@
+crds:
+  create: true
+
+env:
+  AWS_REGION: europe-west1
+  POLLER_INTERVAL_MILLISECONDS: 10000  # Caution, setting this frequency may incur additional charges on some platforms
+  LOG_LEVEL: info
+  METRICS_PORT: 3001
+
+serviceAccount:
+  annotations: 
+    iam.gke.io/gcp-service-account: {{ .Values.jxRequirements.cluster.clusterName }}-sm@{{ .Values.jxRequirements.cluster.project }}.iam.gserviceaccount.com
