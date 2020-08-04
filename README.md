@@ -27,7 +27,7 @@ export ENV_GIT_OWNER=jenkins-x
 export LABELS=""
 ```
 
-2. Get the latest jx CLI https://github.com/jenkins-x/jx-cli/releases/latest
+2. Get the latest jx3 CLI https://github.com/jenkins-x/jx-cli/releases/latest
 
 
 3. Upgrade the CLI plugins
@@ -36,8 +36,46 @@ export LABELS=""
 jx upgrade plugins
 ```
 
-4. Create the boot git repository to mimic creating the git repository via the github create repository wizard
+4. Create the boot git repository
 
 ```bash
-jx admin create -b --initial-git-url https://github.com/jx3-gitops-repositories/jx3-gke-gcloud-gsm --env dev --env-git-owner=$GH_OWNER --repo env-$CLUSTER_NAME-dev --no-operator
+jx admin create -b --initial-git-url https://github.com/rawlingsj/jx3-gke-gcloud-gsm --env dev --env-git-owner=$ENV_GIT_OWNER --repo env-$CLUSTER_NAME-dev --no-operator
+```
+
+5. Clone the newly created boot git repository
+
+```bash
+git clone https://github.com/$ENV_GIT_OWNER/env-$CLUSTER_NAME-dev.git
+cd env-$CLUSTER_NAME-dev
+```
+
+6. Set environment variables
+
+```bash
+./bin/configure.sh
+```
+
+7. Create the cluster
+
+```bash
+./bin/create.sh
+```
+
+8. Commit any local changes and push
+
+```bash
+# lets add / commit any cloud resource specific changes
+git add --all
+git commit -a -m "chore: cluster configuration changes"
+git push
+```
+
+9. Install the gitops operator
+
+This will install a Kubernetes job that periodically syncronises the git repository with your Kubernetes cluster
+
+```bash
+# --username is found from $GIT_USERNAME or git clone URL
+# --token is found from $GIT_TOKEN or git clone URL
+jx admin operator
 ```

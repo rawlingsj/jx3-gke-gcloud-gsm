@@ -11,42 +11,10 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: gsm-sa
-  namespace: {namespace}
-  annotations:
-    iam.gke.io/gcp-service-account: {cluster_name}-sm@{project_id}.iam.gserviceaccount.com
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: kaniko-sa
-  namespace: {namespace}
-  annotations:
-    iam.gke.io/gcp-service-account: {cluster_name}-ko@{project_id}.iam.gserviceaccount.com
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
   name: storage-sa
   namespace: {namespace}
   annotations:
     iam.gke.io/gcp-service-account: {cluster_name}-bc@{project_id}.iam.gserviceaccount.com
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: vault-sa
-  namespace: {namespace}
-  annotations:
-    iam.gke.io/gcp-service-account: {cluster_name}-vt@{project_id}.iam.gserviceaccount.com
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: velero-sa
-  namespace: {namespace}
-  annotations:
-    iam.gke.io/gcp-service-account: {cluster_name}-vo@{project_id}.iam.gserviceaccount.com
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
